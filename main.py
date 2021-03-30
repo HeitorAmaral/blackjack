@@ -11,7 +11,9 @@ def game():
     print('** Bem vindo ao jogo Blackjack! **')
     init = input('Deseja iniciar o jogo? Digite S para Sim, e N para Não iniciar, e sair do jogo: ')
 
-    if init.strip().upper() == 'S':
+    if init.strip().upper() != 'S':
+        print('Sem problemas, volte quando quiser!')
+    else:
         deck = get_deck()
         player_one = 0
         player_one_cards = []
@@ -19,7 +21,7 @@ def game():
         player_two_cards = []
         counter = 0
 
-        while init == 'S':
+        while init.strip().upper() == 'S':
             counter += 1
 
             if counter == 1:
@@ -45,7 +47,7 @@ def game():
                 player_one += get_card_value(player_one_card, 0)
                 player_two += get_card_value(player_two_card, 1)
                 print(f'\nRodada {counter} - Você = {player_one_card.card_value}\n')
-                #print(f'Rodada {counter} - Mesa = {player_two_card.card_value}\n')
+                # print(f'Rodada {counter} - Mesa = {player_two_card.card_value}\n')
 
                 if player_two == 21:
                     print('Você perdeu! A mesa fez 21 pontos e ganhou o jogo!')
@@ -77,8 +79,6 @@ def game():
 
         print(f'Cartas da Mesa: {player_two_cards} = {player_two}')
         print(f'Suas cartas: {player_one_cards} = {player_one}')
-    else:
-        print('Sem problemas, volte quando quiser!')
 
 
 def get_random_card(deck):
@@ -87,12 +87,12 @@ def get_random_card(deck):
     return card
 
 
-def get_card_value(card, type):
+def get_card_value(card, operation_type):
     card_value = card.card_value
     if card_value in ['J', 'Q', 'K']:
         return 10
     elif card_value == 'A':
-        if type == 0:
+        if operation_type == 0:
             return int(input('Você tirou um Ás! É necessário que escolha um valor para essa carta, sendo 1 ou 11. '
                              'Qual valor escolhe? '))
         else:
